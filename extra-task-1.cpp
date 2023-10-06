@@ -188,5 +188,11 @@ double time_from_utc(int utc_offset, double time)
         >>> time_from_utc(+1, 23.0)
         0.0
     */
-    return 0;
+    double endTime = utc_offset + time;
+    if (endTime > 24) endTime -= 24 * (int)(endTime / 24);
+    if (endTime < 0) endTime += 24;
+    if (endTime == 24) endTime = 0;
+    return endTime;
+    //or just 
+    //return time_to_utc(utc_offset * -1, time);
 }
